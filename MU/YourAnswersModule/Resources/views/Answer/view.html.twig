@@ -25,6 +25,7 @@
                 {% endif %}
                 <col id="cName" />
                 <col id="cTextOfAnswer" />
+                <col id="cContent" />
                 <col id="cQuestion" />
             </colgroup>
             <thead>
@@ -45,6 +46,9 @@
                 </th>
                 <th id="hTextOfAnswer" scope="col" class="text-left">
                     <a href="{{ sort.textOfAnswer.url }}" title="{{ __f('Sort by %s', {'%s': 'text of answer'}) }}" class="{{ sort.textOfAnswer.class }}">{{ __('Text of answer') }}</a>
+                </th>
+                <th id="hContent" scope="col" class="text-left">
+                    <a href="{{ sort.content.url }}" title="{{ __f('Sort by %s', {'%s': 'content'}) }}" class="{{ sort.content.class }}">{{ __('Content') }}</a>
                 </th>
                 <th id="hQuestion" scope="col" class="text-left">
                     <a href="{{ sort.question.url }}" title="{{ __f('Sort by %s', {'%s': 'question'}) }}" class="{{ sort.question.class }}">{{ __('Question') }}</a>
@@ -76,6 +80,9 @@
                 <td headers="hTextOfAnswer" class="text-left">
                     {{ answer.textOfAnswer|striptags|truncate(50) }}
                 </td>
+                <td headers="hContent" class="text-left">
+                    {{ answer.content|striptags|truncate(50) }}
+                </td>
                 <td headers="hQuestion" class="text-left">
                     {% if answer.question|default %}
                         <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'display', {'id': answer.question.getId()}) }}">{% spaceless %}
@@ -89,7 +96,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}6{% else %}5{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}7{% else %}6{% endif %}">
             {{ __('No answers found.') }}
               </td>
             </tr>

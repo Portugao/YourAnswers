@@ -74,6 +74,14 @@ abstract class AbstractAnswerEntity extends EntityAccess
      */
     protected $textOfAnswer = '';
     
+    /**
+     * @ORM\Column(type="text", length=2000)
+     * @Assert\NotNull()
+     * @Assert\Length(min="0", max="2000")
+     * @var text $content
+     */
+    protected $content = '';
+    
     
     /**
      * Bidirectional - Many answers [answers] are linked by one question [question] (OWNING SIDE).
@@ -215,6 +223,30 @@ abstract class AbstractAnswerEntity extends EntityAccess
     {
         if ($this->textOfAnswer !== $textOfAnswer) {
             $this->textOfAnswer = isset($textOfAnswer) ? $textOfAnswer : '';
+        }
+    }
+    
+    /**
+     * Returns the content.
+     *
+     * @return text
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+    
+    /**
+     * Sets the content.
+     *
+     * @param text $content
+     *
+     * @return void
+     */
+    public function setContent($content)
+    {
+        if ($this->content !== $content) {
+            $this->content = isset($content) ? $content : '';
         }
     }
     

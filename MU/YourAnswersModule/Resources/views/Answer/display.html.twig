@@ -29,6 +29,10 @@
             <dt>{{ __('Text of answer') }}</dt>
             <dd>{{ answer.textOfAnswer|safeHtml }}</dd>
         {% endif %}
+        {% if answer.content is not empty %}
+            <dt>{{ __('Content') }}</dt>
+            <dd>{{ answer.content|safeHtml }}</dd>
+        {% endif %}
         {% if answer.question|default %}
             <dt>{{ __('Question') }}</dt>
             <dd>

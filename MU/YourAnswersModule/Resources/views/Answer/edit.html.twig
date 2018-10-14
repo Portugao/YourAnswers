@@ -16,6 +16,9 @@
             <legend>{{ __('Content') }}</legend>
             {{ form_row(form.name) }}
             {{ form_row(form.textOfAnswer) }}
+            <div class="hidden">
+            {{ form_row(form.content) }}
+            </div>
         </fieldset>
         
         {{ include(

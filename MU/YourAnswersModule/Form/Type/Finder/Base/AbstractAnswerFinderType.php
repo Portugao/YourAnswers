@@ -133,6 +133,7 @@ abstract class AbstractAnswerFinderType extends AbstractType
                     $this->__('Workflow state') => 'workflowState',
                     $this->__('Name') => 'name',
                     $this->__('Text of answer') => 'textOfAnswer',
+                    $this->__('Content') => 'content',
                     $this->__('Creation date') => 'createdDate',
                     $this->__('Creator') => 'createdBy',
                     $this->__('Update date') => 'updatedDate',

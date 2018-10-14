@@ -20,6 +20,10 @@ application "YourAnswers" {
                 text "textOfAnswer" {
                     length 10000
                 }
+            ,
+                text "content" {
+                    mandatory false
+                }
             }
             actions {
                 mainAction "Index",

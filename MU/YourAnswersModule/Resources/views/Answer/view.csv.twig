@@ -1,9 +1,9 @@
 {# purpose of this template: answers view csv view #}
-{% spaceless %}"{{ __('Name') }}";"{{ __('Text of answer') }}";"{{ __('Workflow state') }}";"{{ __('Question') }}"
+{% spaceless %}"{{ __('Name') }}";"{{ __('Text of answer') }}";"{{ __('Content') }}";"{{ __('Workflow state') }}";"{{ __('Question') }}"
 {% endspaceless %}
 {% for answer in items %}
 
 {% spaceless %}
-    "{{ answer.name }}";"{{ answer.textOfAnswer|safeHtml }}";"{{ answer.workflowState|muyouranswersmodule_objectState(false)|lower }}";"{% if answer.question|default %}{{ answer.question|muyouranswersmodule_formattedTitle }}{% endif %}"
+    "{{ answer.name }}";"{{ answer.textOfAnswer|safeHtml }}";"{{ answer.content|safeHtml }}";"{{ answer.workflowState|muyouranswersmodule_objectState(false)|lower }}";"{% if answer.question|default %}{{ answer.question|muyouranswersmodule_formattedTitle }}{% endif %}"
 {% endspaceless %}
 {% endfor %}

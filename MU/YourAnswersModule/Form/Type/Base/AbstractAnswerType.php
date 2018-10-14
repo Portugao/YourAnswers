@@ -146,6 +146,18 @@ abstract class AbstractAnswerType extends AbstractType
             ],
             'required' => true,
         ]);
+        
+        $builder->add('content', TextareaType::class, [
+            'label' => $this->__('Content') . ':',
+            'help' => $this->__f('Note: this value must not exceed %amount% characters.', ['%amount%' => 2000]),
+            'empty_data' => '',
+            'attr' => [
+                'maxlength' => 2000,
+                'class' => '',
+                'title' => $this->__('Enter the content of the answer.')
+            ],
+            'required' => false,
+        ]);
     }
 
     /**

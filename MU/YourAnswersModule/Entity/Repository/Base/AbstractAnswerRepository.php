@@ -58,6 +58,7 @@ abstract class AbstractAnswerRepository extends EntityRepository
             'workflowState',
             'name',
             'textOfAnswer',
+            'content',
             'createdBy',
             'createdDate',
             'updatedBy',
