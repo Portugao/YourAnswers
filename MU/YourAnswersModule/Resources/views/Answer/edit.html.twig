@@ -37,6 +37,7 @@
             </fieldset>
         {% endif %}
         
+        <div class="hidden">        
         <fieldset>
             <legend>{{ __('Communication') }}</legend>
             {{ form_row(form.additionalNotificationRemarks) }}
@@ -55,7 +56,7 @@
                 </div>
             </fieldset>
         {% endif %}
-        
+        </div>
         
         {# include possible submit actions #}
         <div class="form-group form-buttons">

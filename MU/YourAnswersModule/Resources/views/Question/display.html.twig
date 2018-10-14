@@ -28,7 +28,7 @@
             <dd>{{ question.subject }}</dd>
         {% endif %#}
         {% if question.textOfQuestion is not empty %}
-            <dt>{{ __('Text of question') }}</dt>
+            <dt>{#{ __('Text of question') }#}</dt>
             <dd>{{ question.textOfQuestion|safeHtml }}</dd>
         {% endif %}
         {#% if question.forLanguage is not empty %}
@@ -80,7 +80,7 @@
     {% if mayManage %}
         <p class="managelink">
             {% set createTitle = __('Create answer') %}
-            <a href="{{ path('muyouranswersmodule_answer_' ~ routeArea ~ 'edit', {question: question.getKey()}) }}" title="{{ createTitle|e('html_attr') }}"><i class="fa fa-plus"></i> {{ createTitle }}</a>
+            <a class="btn btn-default" href="{{ path('muyouranswersmodule_answer_' ~ routeArea ~ 'edit', {question: question.getKey()}) }}" title="{{ createTitle|e('html_attr') }}"><i class="fa fa-plus"></i> {{ createTitle }}</a>
         </p>
     {% endif %}
 {% endblock %}
