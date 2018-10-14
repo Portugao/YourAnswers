@@ -75,7 +75,7 @@
                     {{ question.workflowState|muyouranswersmodule_objectState }}
                 </td>
                 {% endif %}<td headers="hSubject" class="text-left">
-                    {{ question.subject }}
+                    <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'display', {'id': question.getId()}) }}" title="{{ __('View detail page')|e('html_attr') }}">{{ question.subject }}</a>
                 </td>
                 <td headers="hTextOfQuestion" class="text-left">
                     {{ question.textOfQuestion|striptags|truncate(50) }}
