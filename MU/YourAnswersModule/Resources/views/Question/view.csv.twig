@@ -1,0 +1,19 @@
+{# purpose of this template: questions view csv view #}
+{% spaceless %}"{{ __('Subject') }}";"{{ __('Text of question') }}";"{{ __('For language') }}";"{{ __('Start date') }}";"{{ __('End date') }}";"{{ __('Workflow state') }}";"{{ __('Answers') }}"
+{% endspaceless %}
+{% for question in items %}
+
+{% spaceless %}
+    "{{ question.subject }}";"{{ question.textOfQuestion|safeHtml }}";"{{ question.forLanguage|languageName }}";"{% if question.startDate is not empty %}
+        {{ question.startDate|localizeddate('medium', 'short') }}
+    {% endif %}";"{% if question.endDate is not empty %}
+        {{ question.endDate|localizeddate('medium', 'short') }}
+    {% endif %}";"{{ question.workflowState|muyouranswersmodule_objectState(false)|lower }}";"
+    {% if question.answers|default %}
+        {% for relatedItem in question.answers %}
+        {{ relatedItem|muyouranswersmodule_formattedTitle }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    {% endif %}
+    "
+{% endspaceless %}
+{% endfor %}

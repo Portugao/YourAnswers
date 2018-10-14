@@ -1,0 +1,9 @@
+{# purpose of this template: answers index view #}
+{% extends routeArea == 'admin' ? 'MUYourAnswersModule::adminBase.html.twig' : 'MUYourAnswersModule::base.html.twig' %}
+{% block title __('Answers') %}
+{% block admin_page_icon 'home' %}
+{% block content %}
+    <div class="muyouranswersmodule-answer muyouranswersmodule-index">
+        <p>{{ __('Welcome to the answer section of the Your answers application.') }}</p>
+    </div>
+{% endblock %}

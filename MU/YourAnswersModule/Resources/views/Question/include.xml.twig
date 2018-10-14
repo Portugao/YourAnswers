@@ -1,0 +1,21 @@
+{# purpose of this template: questions xml inclusion template #}
+<question id="{{ question.getId() }}" createdon="{{ question.createdDate|localizeddate('medium', 'short') }}" updatedon="{{ question.updatedDate|localizeddate('medium', 'short') }}">
+    <id>{{ question.id }}</id>
+    <subject><![CDATA[{{ question.subject }}]]></subject>
+    <textOfQuestion><![CDATA[{{ question.textOfQuestion|safeHtml }}]]></textOfQuestion>
+    <forLanguage><![CDATA[{{ question.forLanguage|languageName }}]]></forLanguage>
+    <startDate>{% if question.startDate is not empty %}
+        {{ question.startDate|localizeddate('medium', 'short') }}
+    {% endif %}</startDate>
+    <endDate>{% if question.endDate is not empty %}
+        {{ question.endDate|localizeddate('medium', 'short') }}
+    {% endif %}</endDate>
+    <workflowState>{{ question.workflowState|muyouranswersmodule_objectState(false)|lower }}</workflowState>
+    <answers>
+    {% if question.answers|default %}
+        {% for relatedItem in question.answers %}
+        <answer>{{ relatedItem|muyouranswersmodule_formattedTitle }}</answer>
+        {% endfor %}
+    {% endif %}
+    </answers>
+</question>

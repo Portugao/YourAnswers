@@ -1,0 +1,127 @@
+services:
+    # Helper services
+    mu_youranswers_module.archive_helper:
+        class: MU\YourAnswersModule\Helper\ArchiveHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@logger"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.permission_helper"
+            - "@mu_youranswers_module.workflow_helper"
+            - "@mu_youranswers_module.hook_helper"
+    
+    mu_youranswers_module.collection_filter_helper:
+        class: MU\YourAnswersModule\Helper\CollectionFilterHelper
+        arguments:
+            - "@request_stack"
+            - "@mu_youranswers_module.permission_helper"
+            - "@zikula_users_module.current_user"
+            - "@=service('zikula_extensions_module.api.variable').get('MUYourAnswersModule', 'showOnlyOwnEntries', false)"
+            - "@=service('zikula_extensions_module.api.variable').get('MUYourAnswersModule', 'filterDataByLocale', false)"
+    
+    mu_youranswers_module.controller_helper:
+        class: MU\YourAnswersModule\Helper\ControllerHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@mu_youranswers_module.archive_helper"
+            - "@form.factory"
+            - "@zikula_extensions_module.api.variable"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.collection_filter_helper"
+            - "@mu_youranswers_module.permission_helper"
+            - "@mu_youranswers_module.model_helper"
+            - "@mu_youranswers_module.feature_activation_helper"
+    
+    mu_youranswers_module.entity_display_helper:
+        class: MU\YourAnswersModule\Helper\EntityDisplayHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@mu_youranswers_module.listentries_helper"
+    
+    mu_youranswers_module.feature_activation_helper:
+        class: MU\YourAnswersModule\Helper\FeatureActivationHelper
+    
+    mu_youranswers_module.hook_helper:
+        class: MU\YourAnswersModule\Helper\HookHelper
+        arguments:
+            - "@hook_dispatcher"
+    
+    mu_youranswers_module.listentries_helper:
+        class: MU\YourAnswersModule\Helper\ListEntriesHelper
+        arguments:
+            - "@translator.default"
+    
+    mu_youranswers_module.model_helper:
+        class: MU\YourAnswersModule\Helper\ModelHelper
+        arguments:
+            - "@mu_youranswers_module.entity_factory"
+    
+    mu_youranswers_module.notification_helper:
+        class: MU\YourAnswersModule\Helper\NotificationHelper
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@router"
+            - "@request_stack"
+            - "@zikula_extensions_module.api.variable"
+            - "@twig"
+            - "@zikula_mailer_module.api.mailer"
+            - "@zikula_groups_module.group_repository"
+            - "@mu_youranswers_module.entity_display_helper"
+            - "@mu_youranswers_module.workflow_helper"
+    
+    mu_youranswers_module.permission_helper:
+        class: MU\YourAnswersModule\Helper\PermissionHelper
+        arguments:
+            - "@service_container"
+            - "@request_stack"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_users_module.current_user"
+            - "@zikula_users_module.user_repository"
+    
+    mu_youranswers_module.search_helper:
+        class: MU\YourAnswersModule\Helper\SearchHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@request_stack"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.controller_helper"
+            - "@mu_youranswers_module.entity_display_helper"
+            - "@mu_youranswers_module.permission_helper"
+        tags:
+            - { name: zikula.searchable_module, bundleName: MUYourAnswersModule }
+    
+    mu_youranswers_module.translatable_helper:
+        class: MU\YourAnswersModule\Helper\TranslatableHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@zikula_extensions_module.api.variable"
+            - "@zikula_settings_module.locale_api"
+            - "@mu_youranswers_module.entity_factory"
+    
+    mu_youranswers_module.view_helper:
+        class: MU\YourAnswersModule\Helper\ViewHelper
+        arguments:
+            - "@twig"
+            - "@twig.loader"
+            - "@request_stack"
+            - "@zikula_extensions_module.api.variable"
+            - "@zikula_core.common.theme.pagevars"
+            - "@mu_youranswers_module.controller_helper"
+            - "@mu_youranswers_module.permission_helper"
+    
+    mu_youranswers_module.workflow_helper:
+        class: MU\YourAnswersModule\Helper\WorkflowHelper
+        arguments:
+            - "@translator.default"
+            - "@workflow.registry"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.listentries_helper"
+            - "@mu_youranswers_module.permission_helper"

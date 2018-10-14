@@ -1,0 +1,58 @@
+{# purpose of this template: answers display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'MUYourAnswersModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ answer|muyouranswersmodule_formattedTitle|default(__('Answer')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = answer|muyouranswersmodule_formattedTitle|default(__('Answer')) %}
+    {{ templateTitle|notifyFilters('muyouranswersmodule.filter_hooks.answers.filter')|safeHtml }}{% if routeArea == 'admin' %} <small>({{ answer.workflowState|muyouranswersmodule_objectState(false)|lower }})</small>{% endif %}
+    {% set itemActions = knp_menu_get('mUYourAnswersMenuItemActions', [], {entity: answer, area: routeArea, context: 'display'}) %}
+    <div class="dropdown">
+        <a id="itemActions{{ answer.getKey() }}DropDownToggleStart" role="button" data-toggle="dropdown" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
+        {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
+    </div>
+{% endblock %}
+{% block admin_page_icon 'eye' %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="muyouranswersmodule-answer muyouranswersmodule-display">
+
+    <dl>
+        {% if answer.workflowState is not empty and routeArea == 'admin' %}
+            <dt>{{ __('State') }}</dt>
+            <dd>{{ answer.workflowState|muyouranswersmodule_listEntry('answer', 'workflowState') }}</dd>
+        {% endif %}
+        {% if answer.textOfAnswer is not empty %}
+            <dt>{{ __('Text of answer') }}</dt>
+            <dd>{{ answer.textOfAnswer|safeHtml }}</dd>
+        {% endif %}
+        {% if answer.question|default %}
+            <dt>{{ __('Question') }}</dt>
+            <dd>
+              {% if not isQuickView %}
+                  <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'display', {'id': answer.question.getId()}) }}">{% spaceless %}
+                    {{ answer.question|muyouranswersmodule_formattedTitle }}
+                  {% endspaceless %}</a>
+                  <a id="questionItem{{ answer.question.getKey() }}Display" href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'display', {'id': answer.question.getId(), raw: 1}) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="muyouranswers-inline-window hidden" data-modal-title="{{ answer.question|muyouranswersmodule_formattedTitle|e('html_attr') }}"><i class="fa fa-id-card-o"></i></a>
+              {% else %}
+                  {{ answer.question|muyouranswersmodule_formattedTitle }}
+              {% endif %}
+            </dd>
+        {% endif %}
+        
+    </dl>
+
+    {{ include('@MUYourAnswersModule/Helper/includeStandardFieldsDisplay.html.twig', {obj: answer}) }}
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block display_hooks %}
+    {% if answer.supportsHookSubscribers() %}
+        {% set hooks = notifyDisplayHooks(eventName='muyouranswersmodule.ui_hooks.answers.display_view', id=answer.getKey(), urlObject=currentUrlObject, outputAsArray=true) %}
+        {% if hooks is iterable and hooks|length > 0 %}
+            {% for area, hook in hooks %}
+                <div class="z-displayhook" data-area="{{ area|e('html_attr') }}">{{ hook|raw }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

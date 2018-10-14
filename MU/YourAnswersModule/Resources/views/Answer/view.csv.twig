@@ -1,0 +1,9 @@
+{# purpose of this template: answers view csv view #}
+{% spaceless %}"{{ __('Text of answer') }}";"{{ __('Workflow state') }}";"{{ __('Question') }}"
+{% endspaceless %}
+{% for answer in items %}
+
+{% spaceless %}
+    "{{ answer.textOfAnswer|safeHtml }}";"{{ answer.workflowState|muyouranswersmodule_objectState(false)|lower }}";"{% if answer.question|default %}{{ answer.question|muyouranswersmodule_formattedTitle }}{% endif %}"
+{% endspaceless %}
+{% endfor %}

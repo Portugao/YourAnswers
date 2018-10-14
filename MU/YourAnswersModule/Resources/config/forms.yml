@@ -1,0 +1,113 @@
+services:
+    # Form types
+    
+    mu_youranswers_module.form.type.answerquicknav:
+        class: MU\YourAnswersModule\Form\Type\QuickNavigation\AnswerQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@mu_youranswers_module.entity_display_helper"
+            - "@mu_youranswers_module.listentries_helper"
+            - "@mu_youranswers_module.feature_activation_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.type.questionquicknav:
+        class: MU\YourAnswersModule\Form\Type\QuickNavigation\QuestionQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.listentries_helper"
+            - "@zikula_settings_module.locale_api"
+            - "@mu_youranswers_module.feature_activation_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.handler.common:
+        abstract: true
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@form.factory"
+            - "@request_stack"
+            - "@router"
+            - "@logger"
+            - "@zikula_extensions_module.api.variable"
+            - "@zikula_users_module.current_user"
+            - "@zikula_groups_module.group_application_repository"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.controller_helper"
+            - "@mu_youranswers_module.model_helper"
+            - "@mu_youranswers_module.permission_helper"
+            - "@mu_youranswers_module.workflow_helper"
+            - "@mu_youranswers_module.hook_helper"
+            - "@mu_youranswers_module.translatable_helper"
+            - "@mu_youranswers_module.feature_activation_helper"
+        calls:
+            - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
+    
+    
+    mu_youranswers_module.form.handler.answer:
+        class: MU\YourAnswersModule\Form\Handler\Answer\EditHandler
+        parent: mu_youranswers_module.form.handler.common
+    
+    mu_youranswers_module.form.type.answer:
+        class: MU\YourAnswersModule\Form\Type\AnswerType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.collection_filter_helper"
+            - "@mu_youranswers_module.entity_display_helper"
+            - "@mu_youranswers_module.listentries_helper"
+            - "@mu_youranswers_module.feature_activation_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.handler.question:
+        class: MU\YourAnswersModule\Form\Handler\Question\EditHandler
+        parent: mu_youranswers_module.form.handler.common
+    
+    mu_youranswers_module.form.type.question:
+        class: MU\YourAnswersModule\Form\Type\QuestionType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.collection_filter_helper"
+            - "@mu_youranswers_module.entity_display_helper"
+            - "@zikula_extensions_module.api.variable"
+            - "@mu_youranswers_module.translatable_helper"
+            - "@mu_youranswers_module.listentries_helper"
+            - "@zikula_settings_module.locale_api"
+            - "@mu_youranswers_module.feature_activation_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.type.block.itemlist:
+        class: MU\YourAnswersModule\Block\Form\Type\ItemListBlockType
+        arguments:
+            - "@translator.default"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.type.block.item:
+        class: MU\YourAnswersModule\Block\Form\Type\ItemBlockType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.entity_display_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.type.answerfinder:
+        class: MU\YourAnswersModule\Form\Type\Finder\AnswerFinderType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.feature_activation_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.type.questionfinder:
+        class: MU\YourAnswersModule\Form\Type\Finder\QuestionFinderType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.feature_activation_helper"
+        tags: ['form.type']
+    
+    mu_youranswers_module.form.type.config:
+        class: MU\YourAnswersModule\Form\Type\ConfigType
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.listentries_helper"
+        tags: ['form.type']

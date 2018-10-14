@@ -1,0 +1,16 @@
+services:
+    # Entity factory
+    mu_youranswers_module.entity_factory:
+        class: MU\YourAnswersModule\Entity\Factory\EntityFactory
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@mu_youranswers_module.entity_initialiser"
+            - "@mu_youranswers_module.collection_filter_helper"
+            - "@mu_youranswers_module.feature_activation_helper"
+    
+    # Entity initialiser
+    mu_youranswers_module.entity_initialiser:
+        class: MU\YourAnswersModule\Entity\Factory\EntityInitialiser
+        arguments:
+            - "@request_stack"
+            - "@mu_youranswers_module.permission_helper"

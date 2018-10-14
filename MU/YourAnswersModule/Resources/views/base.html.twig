@@ -1,0 +1,28 @@
+{# purpose of this template: general base layout #}
+{% block header %}
+{% endblock %}
+
+{% block appTitle %}
+    {{ moduleHeader('user', '', '', false, true, false, true) }}
+{% endblock %}
+
+{% block titleArea %}
+    <h2>{% block title %}{% endblock %}</h2>
+{% endblock %}
+{{ pageSetVar('title', block('pageTitle')|default(block('title'))) }}
+
+{{ include('@MUYourAnswersModule/Helper/includeModerationPanel.html.twig') }}
+
+{{ showflashes() }}
+
+{% block content %}{% endblock %}
+
+{% block footer %}
+    <p class="text-center">
+        Powered by <a href="https://modulestudio.de" title="Get the MOST out of Zikula!">ModuleStudio 1.4.0</a>
+    </p>
+    {{ pageAddAsset('stylesheet', zasset('@MUYourAnswersModule:css/custom.css'), 120) }}
+    {{ pageAddAsset('stylesheet', asset('jquery-ui/themes/base/jquery-ui.min.css')) }}
+    {{ pageAddAsset('javascript', asset('jquery-ui/jquery-ui.min.js')) }}
+    {{ pageAddAsset('javascript', zasset('@MUYourAnswersModule:js/MUYourAnswersModule.js')) }}
+{% endblock %}

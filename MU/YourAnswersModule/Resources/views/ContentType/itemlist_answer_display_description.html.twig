@@ -1,0 +1,13 @@
+{# Purpose of this template: Display answers within an external context #}
+<dl>
+    {% for answer in items %}
+        <dt>{{ answer|muyouranswersmodule_formattedTitle }}</dt>
+        {% if answer.textOfAnswer %}
+            <dd>{{ answer.textOfAnswer|striptags|truncate(200, true, '&hellip;') }}</dd>
+        {% endif %}
+        <dd><a href="{{ path('muyouranswersmodule_answer_display', {'id': answer.getId()}) }}" title="{{ __('Read more')|e('html_attr') }}">{{ __('Read more') }}</a>
+        </dd>
+    {% else %}
+        <dt>{{ __('No entries found.') }}</dt>
+    {% endfor %}
+</dl>

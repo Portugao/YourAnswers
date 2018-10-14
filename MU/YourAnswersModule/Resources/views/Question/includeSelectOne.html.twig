@@ -1,0 +1,75 @@
+{# purpose of this template: inclusion template for managing related question #}
+{% if displayMode is not defined or displayMode is empty %}
+    {% set displayMode = 'choices' %}
+{% endif %}
+{% if tabs|default(false) == true %}
+    <div role="tabpanel" class="tab-pane fade" id="tabQuestion" aria-labelledby="questionTab">
+        <h3>{{ heading|default ? heading : __('Question') }}</h3>
+{% else %}
+    <fieldset class="question">
+{% endif %}
+    <legend>{{ heading|default ? heading : __('Question') }}</legend>
+    {% if displayMode == 'embedded' %}
+        {% set subFields = attribute(form, alias) %}
+        {% if translationsEnabled == true %}
+            <div class="zikula-bootstrap-tab-container">
+                <ul class="{{ form.vars.id|lower }}-translation-locales nav nav-tabs">
+                    {% for language in supportedLanguages %}
+                        <li{% if language == app.request.locale %} class="active"{% endif %}>
+                            <a href="#" data-toggle="tab" data-target=".{{ form.vars.id|lower }}-translations-fields-{{ language }}">
+                                {% if not form.vars.valid %}
+                                    <span class="label label-danger"><i class="fa fa-warning"></i> <span class="sr-only">{{ __('Errors') }}</span></span>
+                                {% endif %}
+                                {% set hasRequiredFields = language in localesWithMandatoryFields %}
+                                {% if hasRequiredFields %}<span class="required">{% endif %}{{ language|languageName|safeHtml }}{% if hasRequiredFields %}</span>{% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="{{ form.vars.id|lower }}-translation-fields tab-content">
+                    {% for language in supportedLanguages %}
+                        <div class="{{ form.vars.id|lower }}-translations-fields-{{ language }} tab-pane fade{% if language == app.request.locale %} active in{% endif %}">
+                            <fieldset>
+                                <legend>{{ language|languageName|safeHtml }}</legend>
+                                {% if language == app.request.locale %}
+                                    {{ form_row(attribute(subFields, 'subject')) }}
+                                    {{ form_row(attribute(subFields, 'textOfQuestion')) }}
+                                {% else %}
+                                    {{ form_row(attribute(form, 'translations' ~ language)) }}
+                                {% endif %}
+                            </fieldset>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            {% set language = app.request.locale %}
+            <fieldset>
+                <legend>{{ language|languageName|safeHtml }}</legend>
+                {{ form_row(attribute(subFields, 'subject')) }}
+                {{ form_row(attribute(subFields, 'textOfQuestion')) }}
+            </fieldset>
+        {% endif %}
+        <fieldset>
+            <legend>{{ __('Further properties') }}</legend>
+            {{ form_row(attribute(subFields, 'forLanguage')) }}
+            {{ form_row(attribute(subFields, 'startDate')) }}
+            {{ form_row(attribute(subFields, 'endDate')) }}
+        </fieldset>
+    {% elseif displayMode == 'choices' %}
+        {{ form_row(attribute(form, alias), {required: mandatory}) }}
+    {% elseif displayMode == 'autocomplete' %}
+        {{ form_row(attribute(form, alias), {required: mandatory}) }}
+        <div class="muyouranswersmodule-relation-leftside">
+            {{ include(
+                '@MUYourAnswersModule/Question/includeSelectItemListOne.html.twig',
+                attribute(linkingItem, alias) is defined ? {item: attribute(linkingItem, alias)} : {}
+            ) }}
+        </div>
+        <br style="clear: both" />
+    {% endif %}
+{% if tabs|default(false) == true %}
+    </div>
+{% else %}
+    </fieldset>
+{% endif %}

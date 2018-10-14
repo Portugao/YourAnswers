@@ -1,0 +1,5 @@
+{# Purpose of this template: Display item information for previewing from other modules #}
+<dl id="question{{ question.getKey() }}">
+<dt>{{ question|muyouranswersmodule_formattedTitle|notifyFilters('youranswers.filter_hooks.questions.filter')|safeHtml }}</dt>
+{% if question.textOfQuestion is not empty %}<dd>{{ question.textOfQuestion }}</dd>{% endif %}
+</dl>

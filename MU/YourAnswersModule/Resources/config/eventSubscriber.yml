@@ -1,0 +1,75 @@
+services:
+    # Event subscribers and listeners
+    mu_youranswers_module.entity_lifecycle_listener:
+        class: MU\YourAnswersModule\Listener\EntityLifecycleListener
+        arguments:
+            - "@service_container"
+            - "@event_dispatcher"
+            - "@logger"
+        tags: ['doctrine.event_subscriber']
+    
+    mu_youranswers_module.kernel_listener:
+        class: MU\YourAnswersModule\Listener\KernelListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.installer_listener:
+        class: MU\YourAnswersModule\Listener\InstallerListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.moduledispatch_listener:
+        class: MU\YourAnswersModule\Listener\ModuleDispatchListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.mailer_listener:
+        class: MU\YourAnswersModule\Listener\MailerListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.theme_listener:
+        class: MU\YourAnswersModule\Listener\ThemeListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.userlogin_listener:
+        class: MU\YourAnswersModule\Listener\UserLoginListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.userlogout_listener:
+        class: MU\YourAnswersModule\Listener\UserLogoutListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.user_listener:
+        class: MU\YourAnswersModule\Listener\UserListener
+        arguments:
+            - "@translator.default"
+            - "@mu_youranswers_module.entity_factory"
+            - "@zikula_users_module.current_user"
+            - "@logger"
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.userregistration_listener:
+        class: MU\YourAnswersModule\Listener\UserRegistrationListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.users_listener:
+        class: MU\YourAnswersModule\Listener\UsersListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.group_listener:
+        class: MU\YourAnswersModule\Listener\GroupListener
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.thirdparty_listener:
+        class: MU\YourAnswersModule\Listener\ThirdPartyListener
+        arguments:
+            - "@filesystem"
+            - "@request_stack"
+            - "@mu_youranswers_module.workflow_helper"
+        tags: ['kernel.event_subscriber']
+    
+    mu_youranswers_module.workflow_events_listener:
+        class: MU\YourAnswersModule\Listener\WorkflowEventsListener
+        arguments:
+            - "@mu_youranswers_module.entity_factory"
+            - "@mu_youranswers_module.permission_helper"
+            - "@mu_youranswers_module.notification_helper"
+        tags: ['kernel.event_subscriber']
+    

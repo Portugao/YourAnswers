@@ -1,0 +1,180 @@
+{# purpose of this template: questions list view #}
+{% extends routeArea == 'admin' ? 'MUYourAnswersModule::adminBase.html.twig' : 'MUYourAnswersModule::base.html.twig' %}
+{% block title own ? __('My questions') : __('Questions list') %}
+{% block admin_page_icon 'list-alt' %}
+{% block content %}
+<div class="muyouranswersmodule-question muyouranswersmodule-view">
+
+    {{ block('page_nav_links') }}
+
+    {{ include('@MUYourAnswersModule/Question/viewQuickNav.html.twig') }}{# see template file for available options #}
+
+    {% if routeArea == 'admin' %}
+    <form action="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'handleselectedentries') }}" method="post" id="questionsViewForm" class="form-horizontal" role="form">
+        <div>
+    {% endif %}
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover{% if routeArea == 'admin' %} table-condensed{% endif %}">
+            <colgroup>
+                {% if routeArea == 'admin' %}
+                    <col id="cSelect" />
+                {% endif %}
+                <col id="cItemActionsStart" />
+                {% if routeArea == 'admin' %}
+                <col id="cWorkflowState" />
+                {% endif %}
+                <col id="cSubject" />
+                <col id="cTextOfQuestion" />
+                <col id="cForLanguage" />
+                <col id="cStartDate" />
+                <col id="cEndDate" />
+            </colgroup>
+            <thead>
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <th id="hSelect" scope="col" class="text-center z-w02">
+                        <input type="checkbox" class="muyouranswers-mass-toggle" />
+                    </th>
+                {% endif %}
+                <th id="hItemActionsStart" scope="col" class="z-w02">{{ __('Actions') }}</th>
+                {% if routeArea == 'admin' %}
+                <th id="hWorkflowState" scope="col" class="text-left">
+                    <a href="{{ sort.workflowState.url }}" title="{{ __f('Sort by %s', {'%s': 'state'}) }}" class="{{ sort.workflowState.class }}">{{ __('State') }}</a>
+                </th>
+                {% endif %}
+                <th id="hSubject" scope="col" class="text-left">
+                    <a href="{{ sort.subject.url }}" title="{{ __f('Sort by %s', {'%s': 'subject'}) }}" class="{{ sort.subject.class }}">{{ __('Subject') }}</a>
+                </th>
+                <th id="hTextOfQuestion" scope="col" class="text-left">
+                    <a href="{{ sort.textOfQuestion.url }}" title="{{ __f('Sort by %s', {'%s': 'text of question'}) }}" class="{{ sort.textOfQuestion.class }}">{{ __('Text of question') }}</a>
+                </th>
+                <th id="hForLanguage" scope="col" class="text-left">
+                    <a href="{{ sort.forLanguage.url }}" title="{{ __f('Sort by %s', {'%s': 'for language'}) }}" class="{{ sort.forLanguage.class }}">{{ __('For language') }}</a>
+                </th>
+                <th id="hStartDate" scope="col" class="text-left">
+                    <a href="{{ sort.startDate.url }}" title="{{ __f('Sort by %s', {'%s': 'start date'}) }}" class="{{ sort.startDate.class }}">{{ __('Start date') }}</a>
+                </th>
+                <th id="hEndDate" scope="col" class="text-left">
+                    <a href="{{ sort.endDate.url }}" title="{{ __f('Sort by %s', {'%s': 'end date'}) }}" class="{{ sort.endDate.class }}">{{ __('End date') }}</a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+        
+        {% for question in items %}
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <td headers="hSelect" class="text-center z-w02">
+                        <input type="checkbox" name="items[]" value="{{ question.getKey() }}" class="muyouranswers-toggle-checkbox" />
+                    </td>
+                {% endif %}
+                <td id="itemActions{{ question.getKey() }}Start" headers="hItemActionsStart" class="actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('mUYourAnswersMenuItemActions', [], {entity: question, area: routeArea, context: 'view'}) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ question.getKey() }}DropDownToggleStart" role="button" data-toggle="dropdown" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:bootstrap_fontawesome.html.twig'}) }}
+                    </div>
+                </td>
+                {% if routeArea == 'admin' %}<td headers="hWorkflowState" class="text-left nowrap">
+                    {{ question.workflowState|muyouranswersmodule_objectState }}
+                </td>
+                {% endif %}<td headers="hSubject" class="text-left">
+                    {{ question.subject }}
+                </td>
+                <td headers="hTextOfQuestion" class="text-left">
+                    {{ question.textOfQuestion|striptags|truncate(50) }}
+                </td>
+                <td headers="hForLanguage" class="text-left">
+                    {{ question.forLanguage|languageName }}
+                </td>
+                <td headers="hStartDate" class="text-left">
+                    {% if question.startDate is not empty %}
+                        {{ question.startDate|localizeddate('medium', 'short') }}
+                    {% endif %}
+                </td>
+                <td headers="hEndDate" class="text-left">
+                    {% if question.endDate is not empty %}
+                        {{ question.endDate|localizeddate('medium', 'short') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}8{% else %}7{% endif %}">
+            {{ __('No questions found.') }}
+              </td>
+            </tr>
+        {% endfor %}
+        
+            </tbody>
+        </table>
+        </div>
+        
+        {% if all != 1 and pager|default %}
+            {{ pager({rowcount: pager.amountOfItems, limit: pager.itemsPerPage, display: 'page', route: 'muyouranswersmodule_question_' ~ routeArea ~ 'view'}) }}
+        {% endif %}
+    {% if routeArea == 'admin' %}
+            <fieldset>
+                <label for="mUYourAnswersModuleAction" class="col-sm-3 control-label">{{ __('With selected questions') }}</label>
+                <div class="col-sm-6">
+                    <select id="mUYourAnswersModuleAction" name="action" class="form-control input-sm">
+                        <option value="">{{ __('Choose action') }}</option>
+                        <option value="approve" title="{{ __('Update content and approve for immediate publishing.') }}">{{ __('Approve') }}</option>
+                        <option value="unpublish" title="{{ __('Hide content temporarily.') }}">{{ __('Unpublish') }}</option>
+                        <option value="publish" title="{{ __('Make content available again.') }}">{{ __('Publish') }}</option>
+                        <option value="archive" title="{{ __('Move content into the archive.') }}">{{ __('Archive') }}</option>
+                        <option value="unarchive" title="{{ __('Move content out of the archive.') }}">{{ __('Unarchive') }}</option>
+                        <option value="delete" title="{{ __('Delete content permanently.') }}">{{ __('Delete') }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" value="{{ __('Submit') }}" class="btn btn-default btn-sm" />
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    {% endif %}
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block page_nav_links %}
+    <p>
+        {% if canBeCreated %}
+            {% if permissionHelper.hasComponentPermission('question', constant('ACCESS_COMMENT')) %}
+                {% set createTitle = __('Create question') %}
+                <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'edit') }}" title="{{ createTitle|e('html_attr') }}"><i class="fa fa-plus"></i> {{ createTitle }}</a>
+            {% endif %}
+        {% endif %}
+        {% if all == 1 %}
+            {% set linkTitle = __('Back to paginated view') %}
+            {% set routeArgs = own ? {own: 1} : {} %}
+            <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'view', routeArgs) }}" title="{{ linkTitle|e('html_attr') }}"><i class="fa fa-table"></i> {{ linkTitle }}</a>
+        {% else %}
+            {% set linkTitle = __('Show all entries') %}
+            {% set routeArgs = own ? {all: 1, own: 1} : {all: 1} %}
+            <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'view', routeArgs) }}" title="{{ linkTitle|e('html_attr') }}"><i class="fa fa-table"></i> {{ linkTitle }}</a>
+        {% endif %}
+        {% if own == 1 %}
+            {% set linkTitle = __('Show also entries from other users') %}
+            {% set routeArgs = all ? {all: 1} : {} %}
+            <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'view', routeArgs) }}" title="{{ linkTitle|e('html_attr') }}"><i class="fa fa-users"></i> {{ linkTitle }}</a>
+        {% else %}
+            {% set linkTitle = __('Show only own entries') %}
+            {% set routeArgs = all ? {all: 1, own: 1} : {own: 1} %}
+            <a href="{{ path('muyouranswersmodule_question_' ~ routeArea ~ 'view', routeArgs) }}" title="{{ linkTitle|e('html_attr') }}"><i class="fa fa-user"></i> {{ linkTitle }}</a>
+        {% endif %}
+    </p>
+{% endblock %}
+{% block display_hooks %}
+    
+    {# here you can activate calling display hooks for the view page if you need it #}
+    {# % if routeArea != 'admin' %}
+        {% set hooks = notifyDisplayHooks(eventName='muyouranswersmodule.ui_hooks.questions.display_view', urlObject=currentUrlObject, outputAsArray=true) %}
+        {% if hooks is iterable and hooks|length > 0 %}
+            {% for area, hook in hooks %}
+                <div class="z-displayhook" data-area="{{ area|e('html_attr') }}">{{ hook|raw }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endif % #}
+{% endblock %}

@@ -1,0 +1,68 @@
+application "YourAnswers" {
+    vendor "MU"
+    author "Michael Ueberschaer"
+    email "info@homepages-mit-zikula.de"
+    url "https://homepages-mit-zikula.de"
+    prefix "youranswers"
+    entities {
+        entity "answer" {
+            nameMultiple "answers"
+            displayPattern "#textOfAnswer#"
+            workflow STANDARD
+            hasTray true
+            fields {
+                text "textOfAnswer" {
+                    length 10000
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit"
+            ,
+                deleteAction "Delete"
+            }
+        },
+        entity "question" leading {
+            nameMultiple "questions"
+            displayPattern "#subject#"
+            workflow STANDARD
+            hasArchive true
+            hasTray true
+            fields {
+                string "subject" translatable,
+                text "textOfQuestion" translatable {
+                    length 6000
+                },
+                string "forLanguage" {
+                    mandatory false
+                    role LOCALE
+                }
+            ,
+                datetime "startDate" nullable startDate {
+                    mandatory false
+                },
+                datetime "endDate" nullable endDate {
+                    mandatory false
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit"
+            ,
+                deleteAction "Delete"
+            }
+        }
+    }
+    relations {
+        one2many bidirectional {
+            source "question"
+            sourceAlias "question"
+            target "answer"
+            targetAlias "answers"
+        }
+    }
+}

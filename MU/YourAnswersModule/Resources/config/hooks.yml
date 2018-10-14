@@ -1,0 +1,43 @@
+services:
+    mu_youranswers_module.hook_subscriber.filter_hooks.answers:
+        class: MU\YourAnswersModule\HookSubscriber\AnswerFilterHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.muyouranswersmodule.filter_hooks.answers' }
+
+    mu_youranswers_module.hook_subscriber.form_aware_hook.answers:
+        class: MU\YourAnswersModule\HookSubscriber\AnswerFormAwareHookSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.muyouranswersmodule.form_aware_hook.answers' }
+
+    mu_youranswers_module.hook_subscriber.ui_hooks.answers:
+        class: MU\YourAnswersModule\HookSubscriber\AnswerUiHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.muyouranswersmodule.ui_hooks.answers' }
+
+    mu_youranswers_module.hook_subscriber.filter_hooks.questions:
+        class: MU\YourAnswersModule\HookSubscriber\QuestionFilterHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.muyouranswersmodule.filter_hooks.questions' }
+
+    mu_youranswers_module.hook_subscriber.form_aware_hook.questions:
+        class: MU\YourAnswersModule\HookSubscriber\QuestionFormAwareHookSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.muyouranswersmodule.form_aware_hook.questions' }
+
+    mu_youranswers_module.hook_subscriber.ui_hooks.questions:
+        class: MU\YourAnswersModule\HookSubscriber\QuestionUiHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.muyouranswersmodule.ui_hooks.questions' }
+

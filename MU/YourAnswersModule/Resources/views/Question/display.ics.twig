@@ -1,0 +1,21 @@
+{# purpose of this template: questions display ics view #}
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:{{ app.request.schemeAndHttpHost }}
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:{{ question|date('Ymd\THi00\Z') }}
+DTEND:{{ question|date('Ymd\THi00\Z') }}
+{% if question.zipcode != '' and question.city is not empty %}{% set location = question.zipcode ~ ' ' ~ question.city %}LOCATION{{ location|muyouranswersmodule_icalText }}{% endif %}
+TRANSP:OPAQUE
+SEQUENCE:0
+UID:{{ 'ICAL' ~ question.startDate ~ random(5000) ~ question.endDate }}
+DTSTAMP:{{ 'now'|date('Ymd\THi00\Z') }}
+ORGANIZER;CN="{{ question.createdBy.getUname() }}":MAILTO:{{ question.createdBy.getEmail() }}
+SUMMARY{{ question|muyouranswersmodule_formattedTitle|muyouranswersmodule_icalText }}
+{% if question.textOfQuestion is not empty %}DESCRIPTION{{ question.textOfQuestion|muyouranswersmodule_icalText }}{% endif %}
+PRIORITY:5
+CLASS:PUBLIC
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
