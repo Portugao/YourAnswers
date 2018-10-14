@@ -118,6 +118,7 @@ abstract class AbstractQuestionEntity extends EntityAccess implements Translatab
      *
      * @ORM\OneToMany(targetEntity="MU\YourAnswersModule\Entity\AnswerEntity", mappedBy="question")
      * @ORM\JoinTable(name="mu_youranswers_questionanswers")
+     * @ORM\OrderBy({"createdDate" = "ASC"})
      * @var \MU\YourAnswersModule\Entity\AnswerEntity[] $answers
      */
     protected $answers = null;

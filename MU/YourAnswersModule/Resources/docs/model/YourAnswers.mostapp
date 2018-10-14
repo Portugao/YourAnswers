@@ -4,13 +4,19 @@ application "YourAnswers" {
     email "info@homepages-mit-zikula.de"
     url "https://homepages-mit-zikula.de"
     prefix "youranswers"
+    markFiles "Resources/views/Answer/includeDisplayItemListMany.html.twig,\r\nResources/views/Question/display.html.twig"
     entities {
         entity "answer" {
             nameMultiple "answers"
-            displayPattern "#textOfAnswer#"
+            displayPattern "#name#"
             workflow STANDARD
             hasTray true
             fields {
+                string "name" {
+                    documentation ""
+                    defaultValue "Gast"
+                    mandatory false
+                },
                 text "textOfAnswer" {
                     length 10000
                 }
@@ -37,6 +43,7 @@ application "YourAnswers" {
                 },
                 string "forLanguage" {
                     mandatory false
+                    displayType NONE
                     role LOCALE
                 }
             ,
@@ -63,6 +70,7 @@ application "YourAnswers" {
             sourceAlias "question"
             target "answer"
             targetAlias "answers"
+        orderBy "createdDate"
         }
     }
 }

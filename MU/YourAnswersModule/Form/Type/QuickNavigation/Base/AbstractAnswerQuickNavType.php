@@ -218,6 +218,7 @@ abstract class AbstractAnswerQuickNavType extends AbstractType
                 ],
                 'choices' =>             [
                     $this->__('Workflow state') => 'workflowState',
+                    $this->__('Name') => 'name',
                     $this->__('Text of answer') => 'textOfAnswer',
                     $this->__('Creation date') => 'createdDate',
                     $this->__('Creator') => 'createdBy',

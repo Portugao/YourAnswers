@@ -1,6 +1,7 @@
 {# purpose of this template: answers xml inclusion template #}
 <answer id="{{ answer.getId() }}" createdon="{{ answer.createdDate|localizeddate('medium', 'short') }}" updatedon="{{ answer.updatedDate|localizeddate('medium', 'short') }}">
     <id>{{ answer.id }}</id>
+    <name><![CDATA[{{ answer.name }}]]></name>
     <textOfAnswer><![CDATA[{{ answer.textOfAnswer|safeHtml }}]]></textOfAnswer>
     <workflowState>{{ answer.workflowState|muyouranswersmodule_objectState(false)|lower }}</workflowState>
     <question>{% if answer.question|default %}{{ answer.question|muyouranswersmodule_formattedTitle }}{% endif %}</question>

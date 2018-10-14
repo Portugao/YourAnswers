@@ -40,7 +40,7 @@ abstract class AbstractAnswerRepository extends EntityRepository
     /**
      * @var string The default sorting field/expression
      */
-    protected $defaultSortingField = 'textOfAnswer';
+    protected $defaultSortingField = 'name';
 
     /**
      * @var CollectionFilterHelper
@@ -56,6 +56,7 @@ abstract class AbstractAnswerRepository extends EntityRepository
     {
         return [
             'workflowState',
+            'name',
             'textOfAnswer',
             'createdBy',
             'createdDate',
@@ -561,7 +562,7 @@ abstract class AbstractAnswerRepository extends EntityRepository
             // but for the slim version we select only the basic fields, and no joins
     
             $selection = 'tbl.id';
-            $selection .= ', tbl.textOfAnswer';
+            $selection .= ', tbl.name';
             $useJoins = false;
         }
     

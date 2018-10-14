@@ -59,6 +59,14 @@ abstract class AbstractAnswerEntity extends EntityAccess
     protected $workflowState = 'initial';
     
     /**
+     * @ORM\Column(length=255)
+     * @Assert\NotNull()
+     * @Assert\Length(min="0", max="255")
+     * @var string $name
+     */
+    protected $name = 'Gast';
+    
+    /**
      * @ORM\Column(type="text", length=10000)
      * @Assert\NotBlank()
      * @Assert\Length(min="0", max="10000")
@@ -159,6 +167,30 @@ abstract class AbstractAnswerEntity extends EntityAccess
     {
         if ($this->workflowState !== $workflowState) {
             $this->workflowState = isset($workflowState) ? $workflowState : '';
+        }
+    }
+    
+    /**
+     * Returns the name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * Sets the name.
+     *
+     * @param string $name
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        if ($this->name !== $name) {
+            $this->name = isset($name) ? $name : '';
         }
     }
     
@@ -273,7 +305,7 @@ abstract class AbstractAnswerEntity extends EntityAccess
      */
     public function __toString()
     {
-        return 'Answer ' . $this->getKey();
+        return 'Answer ' . $this->getKey() . ': ' . $this->getName();
     }
     
     /**

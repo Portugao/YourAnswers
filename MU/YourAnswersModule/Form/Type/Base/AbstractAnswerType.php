@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -122,6 +123,17 @@ abstract class AbstractAnswerType extends AbstractType
      */
     public function addEntityFields(FormBuilderInterface $builder, array $options = [])
     {
+        
+        $builder->add('name', TextType::class, [
+            'label' => $this->__('Name') . ':',
+            'empty_data' => 'Gast',
+            'attr' => [
+                'maxlength' => 255,
+                'class' => '',
+                'title' => $this->__('Enter the name of the answer.')
+            ],
+            'required' => false,
+        ]);
         
         $builder->add('textOfAnswer', TextareaType::class, [
             'label' => $this->__('Text of answer') . ':',

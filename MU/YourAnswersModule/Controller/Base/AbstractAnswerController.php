@@ -143,6 +143,7 @@ abstract class AbstractAnswerController extends AbstractController
         
         $sortableColumns->addColumns([
             new Column('workflowState'),
+            new Column('name'),
             new Column('textOfAnswer'),
             new Column('question'),
             new Column('createdBy'),

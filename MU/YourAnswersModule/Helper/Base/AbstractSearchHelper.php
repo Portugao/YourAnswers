@@ -165,6 +165,7 @@ abstract class AbstractSearchHelper implements SearchableInterface
             switch ($objectType) {
                 case 'answer':
                     $whereArray[] = 'tbl.workflowState';
+                    $whereArray[] = 'tbl.name';
                     $whereArray[] = 'tbl.textOfAnswer';
                     break;
                 case 'question':

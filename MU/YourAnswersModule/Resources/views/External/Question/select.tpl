@@ -22,7 +22,6 @@
                     <option value="workflowState"{if $sort eq 'workflowState'} selected="selected"{/if}>{gt text='Workflow state'}</option>
                     <option value="subject"{if $sort eq 'subject'} selected="selected"{/if}>{gt text='Subject'}</option>
                     <option value="textOfQuestion"{if $sort eq 'textOfQuestion'} selected="selected"{/if}>{gt text='Text of question'}</option>
-                    <option value="forLanguage"{if $sort eq 'forLanguage'} selected="selected"{/if}>{gt text='For language'}</option>
                     <option value="startDate"{if $sort eq 'startDate'} selected="selected"{/if}>{gt text='Start date'}</option>
                     <option value="endDate"{if $sort eq 'endDate'} selected="selected"{/if}>{gt text='End date'}</option>
                     <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>

@@ -63,7 +63,6 @@ abstract class AbstractQuestionRepository extends EntityRepository
             'workflowState',
             'subject',
             'textOfQuestion',
-            'forLanguage',
             'startDate',
             'endDate',
             'createdBy',

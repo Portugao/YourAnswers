@@ -17,24 +17,20 @@
     <div class="muyouranswersmodule-question muyouranswersmodule-display">
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-9">
     <dl>
         {% if question.workflowState is not empty and routeArea == 'admin' %}
             <dt>{{ __('State') }}</dt>
             <dd>{{ question.workflowState|muyouranswersmodule_listEntry('question', 'workflowState') }}</dd>
         {% endif %}
-        {#% if question.subject is not empty %}
+        {% if question.subject is not empty %}
             <dt>{{ __('Subject') }}</dt>
             <dd>{{ question.subject }}</dd>
-        {% endif %#}
+        {% endif %}
         {% if question.textOfQuestion is not empty %}
             <dt>{{ __('Text of question') }}</dt>
             <dd>{{ question.textOfQuestion|safeHtml }}</dd>
         {% endif %}
-        {#% if question.forLanguage is not empty %}
-            <dt>{{ __('For language') }}</dt>
-            <dd>{{ question.forLanguage|languageName }}</dd>
-        {% endif %#}
         {% if question.startDate is not empty %}
             <dt>{{ __('Start date') }}</dt>
             <dd>{% if question.startDate is not empty %}
@@ -49,16 +45,14 @@
         {% endif %}
         
     </dl>
-    
-    {{ block('related_items') }}
 
     {{ include('@MUYourAnswersModule/Helper/includeStandardFieldsDisplay.html.twig', {obj: question}) }}
 
     {{ block('display_hooks') }}
         </div>
-        {#<div class="col-sm-3">
+        <div class="col-sm-3">
             {{ block('related_items') }}
-        </div>#}
+        </div>
     </div>
 </div>
 {% endblock %}

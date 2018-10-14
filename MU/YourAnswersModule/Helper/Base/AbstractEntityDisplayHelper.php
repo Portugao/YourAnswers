@@ -85,8 +85,8 @@ abstract class AbstractEntityDisplayHelper
      */
     protected function formatAnswer(AnswerEntity $entity)
     {
-        return $this->translator->__f('%textOfAnswer%', [
-            '%textOfAnswer%' => $entity->getTextOfAnswer()
+        return $this->translator->__f('%name%', [
+            '%name%' => $entity->getName()
         ]);
     }
     
@@ -114,7 +114,7 @@ abstract class AbstractEntityDisplayHelper
     public function getTitleFieldName($objectType)
     {
         if ($objectType == 'answer') {
-            return '';
+            return 'name';
         }
         if ($objectType == 'question') {
             return 'subject';

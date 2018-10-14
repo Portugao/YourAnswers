@@ -117,7 +117,7 @@
             </tr>
             <tr>
                 <th id="hAnswerSettingsDisplayPattern" scope="row" headers="hAnswerSettingsName">Anzeigemuster</th>
-                <td headers="hAnswerSettingsDisplayPattern hAnswerSettingsValue">#textOfAnswer#</td>
+                <td headers="hAnswerSettingsDisplayPattern hAnswerSettingsValue">#name#</td>
                 <td headers="hAnswerSettingsDisplayPattern hAnswerSettingsDescription">Muster zur Anzeige von Instanzen dieser Entität</td>
             </tr>
             <tr>
@@ -207,6 +207,23 @@
                 </td>
             </tr>
             <tr>
+                <th id="hEntityAnswerFieldName" scope="row" headers="hEntityAnswerFieldName">Name</th>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldType">Zeichenkette</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldMandatory">false</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldDefault">Gast</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldDisplayType">ALL</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldConstraints">
+                    <ul>
+                        <li>Hat eine Länge von 255 Zeichen.</li>
+                    </ul>
+                </td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldRemarks">
+                    <ul>
+                        <li>Dieses Feld ist nicht eindeutig und erlaubt keine Null-Werte.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <th id="hEntityAnswerFieldTextOfAnswer" scope="row" headers="hEntityAnswerFieldName">Text of answer</th>
                 <td headers="hEntityAnswerFieldTextOfAnswer hEntityAnswerFieldType">Text</td>
                 <td headers="hEntityAnswerFieldTextOfAnswer hEntityAnswerFieldMandatory">true</td>
@@ -257,6 +274,7 @@
                         <li>Aus Sicht der Quelle wird keine Kaskade angewendet.</li>
                         <li>Aus Sicht des Ziels wird keine Kaskade angewendet.</li>
                         <li>Diese Relation wird durch eine bidirektionale Assoziation realisiert.</li>
+                        <li>Die answers werden nach dem Feld "createdDate" sortiert.</li>
                         <li>Das Bearbeiten der Quellseite beinhaltet keine Funktionalität bezüglich der Zielelemente.</li>
                         <li>Das Bearbeiten der Zielseite beinhaltet das Auswählen von Quellelementen, die durch eine mehrwertige Dropdownliste repräsentiert werden.</li>
                     </ul>
@@ -595,7 +613,7 @@
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldType">Zeichenkette</td>
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldMandatory">false</td>
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldDefault"></td>
-                <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldDisplayType">ALL</td>
+                <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldDisplayType">NONE</td>
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldConstraints">
                     <ul>
                         <li>Hat eine Länge von 255 Zeichen.</li>
@@ -676,6 +694,7 @@
                         <li>Aus Sicht der Quelle wird keine Kaskade angewendet.</li>
                         <li>Aus Sicht des Ziels wird keine Kaskade angewendet.</li>
                         <li>Diese Relation wird durch eine bidirektionale Assoziation realisiert.</li>
+                        <li>Die answers werden nach dem Feld "createdDate" sortiert.</li>
                         <li>Das Bearbeiten der Quellseite beinhaltet keine Funktionalität bezüglich der Zielelemente.</li>
                         <li>Das Bearbeiten der Zielseite beinhaltet das Auswählen von Quellelementen, die durch eine mehrwertige Dropdownliste repräsentiert werden.</li>
                     </ul>

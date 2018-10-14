@@ -417,6 +417,8 @@ abstract class AbstractCollectionFilterHelper
         if ($objectType == 'answer') {
             $filters[] = 'tbl.workflowState = :searchWorkflowState';
             $parameters['searchWorkflowState'] = $fragment;
+            $filters[] = 'tbl.name LIKE :searchName';
+            $parameters['searchName'] = '%' . $fragment . '%';
             $filters[] = 'tbl.textOfAnswer LIKE :searchTextOfAnswer';
             $parameters['searchTextOfAnswer'] = '%' . $fragment . '%';
         }

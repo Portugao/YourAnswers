@@ -133,7 +133,6 @@ abstract class AbstractQuestionFinderType extends AbstractType
                     $this->__('Workflow state') => 'workflowState',
                     $this->__('Subject') => 'subject',
                     $this->__('Text of question') => 'textOfQuestion',
-                    $this->__('For language') => 'forLanguage',
                     $this->__('Start date') => 'startDate',
                     $this->__('End date') => 'endDate',
                     $this->__('Creation date') => 'createdDate',

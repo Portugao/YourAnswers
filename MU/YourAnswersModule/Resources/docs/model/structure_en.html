@@ -117,7 +117,7 @@
             </tr>
             <tr>
                 <th id="hAnswerSettingsDisplayPattern" scope="row" headers="hAnswerSettingsName">Display pattern</th>
-                <td headers="hAnswerSettingsDisplayPattern hAnswerSettingsValue">#textOfAnswer#</td>
+                <td headers="hAnswerSettingsDisplayPattern hAnswerSettingsValue">#name#</td>
                 <td headers="hAnswerSettingsDisplayPattern hAnswerSettingsDescription">Pattern for displaying instances of this entity</td>
             </tr>
             <tr>
@@ -207,6 +207,23 @@
                 </td>
             </tr>
             <tr>
+                <th id="hEntityAnswerFieldName" scope="row" headers="hEntityAnswerFieldName">Name</th>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldType">String</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldMandatory">false</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldDefault">Gast</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldDisplayType">ALL</td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldConstraints">
+                    <ul>
+                        <li>Has a length of 255 chars.</li>
+                    </ul>
+                </td>
+                <td headers="hEntityAnswerFieldName hEntityAnswerFieldRemarks">
+                    <ul>
+                        <li>This field is not unique and allows no null values.</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
                 <th id="hEntityAnswerFieldTextOfAnswer" scope="row" headers="hEntityAnswerFieldName">Text of answer</th>
                 <td headers="hEntityAnswerFieldTextOfAnswer hEntityAnswerFieldType">Text</td>
                 <td headers="hEntityAnswerFieldTextOfAnswer hEntityAnswerFieldMandatory">true</td>
@@ -257,6 +274,7 @@
                         <li>From source view no cascading is applied.</li>
                         <li>From target view no cascading is applied.</li>
                         <li>This relation is realised by a bidirectional association.</li>
+                        <li>The answers are sorted by the "createdDate" field.</li>
                         <li>Editing the source side includes no behaviour regarding target elements.</li>
                         <li>Editing the target side includes choosing source elements that are represented as a multi-valued dropdown list.</li>
                     </ul>
@@ -595,7 +613,7 @@
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldType">String</td>
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldMandatory">false</td>
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldDefault"></td>
-                <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldDisplayType">ALL</td>
+                <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldDisplayType">NONE</td>
                 <td headers="hEntityQuestionFieldForLanguage hEntityQuestionFieldConstraints">
                     <ul>
                         <li>Has a length of 255 chars.</li>
@@ -676,6 +694,7 @@
                         <li>From source view no cascading is applied.</li>
                         <li>From target view no cascading is applied.</li>
                         <li>This relation is realised by a bidirectional association.</li>
+                        <li>The answers are sorted by the "createdDate" field.</li>
                         <li>Editing the source side includes no behaviour regarding target elements.</li>
                         <li>Editing the target side includes choosing source elements that are represented as a multi-valued dropdown list.</li>
                     </ul>

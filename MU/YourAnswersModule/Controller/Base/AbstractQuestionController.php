@@ -145,7 +145,6 @@ abstract class AbstractQuestionController extends AbstractController
             new Column('workflowState'),
             new Column('subject'),
             new Column('textOfQuestion'),
-            new Column('forLanguage'),
             new Column('startDate'),
             new Column('endDate'),
             new Column('createdBy'),

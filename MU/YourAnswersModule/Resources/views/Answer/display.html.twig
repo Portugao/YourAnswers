@@ -21,6 +21,10 @@
             <dt>{{ __('State') }}</dt>
             <dd>{{ answer.workflowState|muyouranswersmodule_listEntry('answer', 'workflowState') }}</dd>
         {% endif %}
+        {% if answer.name is not empty %}
+            <dt>{{ __('Name') }}</dt>
+            <dd>{{ answer.name }}</dd>
+        {% endif %}
         {% if answer.textOfAnswer is not empty %}
             <dt>{{ __('Text of answer') }}</dt>
             <dd>{{ answer.textOfAnswer|safeHtml }}</dd>

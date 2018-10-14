@@ -23,6 +23,7 @@
                 {% if routeArea == 'admin' %}
                 <col id="cWorkflowState" />
                 {% endif %}
+                <col id="cName" />
                 <col id="cTextOfAnswer" />
                 <col id="cQuestion" />
             </colgroup>
@@ -39,6 +40,9 @@
                     <a href="{{ sort.workflowState.url }}" title="{{ __f('Sort by %s', {'%s': 'state'}) }}" class="{{ sort.workflowState.class }}">{{ __('State') }}</a>
                 </th>
                 {% endif %}
+                <th id="hName" scope="col" class="text-left">
+                    <a href="{{ sort.name.url }}" title="{{ __f('Sort by %s', {'%s': 'name'}) }}" class="{{ sort.name.class }}">{{ __('Name') }}</a>
+                </th>
                 <th id="hTextOfAnswer" scope="col" class="text-left">
                     <a href="{{ sort.textOfAnswer.url }}" title="{{ __f('Sort by %s', {'%s': 'text of answer'}) }}" class="{{ sort.textOfAnswer.class }}">{{ __('Text of answer') }}</a>
                 </th>
@@ -66,7 +70,10 @@
                 {% if routeArea == 'admin' %}<td headers="hWorkflowState" class="text-left nowrap">
                     {{ answer.workflowState|muyouranswersmodule_objectState }}
                 </td>
-                {% endif %}<td headers="hTextOfAnswer" class="text-left">
+                {% endif %}<td headers="hName" class="text-left">
+                    <a href="{{ path('muyouranswersmodule_answer_' ~ routeArea ~ 'display', {'id': answer.getId()}) }}" title="{{ __('View detail page')|e('html_attr') }}">{{ answer.name|notifyFilters('muyouranswersmodule.filterhook.answers')|safeHtml }}</a>
+                </td>
+                <td headers="hTextOfAnswer" class="text-left">
                     {{ answer.textOfAnswer|striptags|truncate(50) }}
                 </td>
                 <td headers="hQuestion" class="text-left">
@@ -82,7 +89,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}5{% else %}4{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}6{% else %}5{% endif %}">
             {{ __('No answers found.') }}
               </td>
             </tr>

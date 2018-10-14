@@ -25,7 +25,6 @@
                 {% endif %}
                 <col id="cSubject" />
                 <col id="cTextOfQuestion" />
-                <col id="cForLanguage" />
                 <col id="cStartDate" />
                 <col id="cEndDate" />
             </colgroup>
@@ -47,9 +46,6 @@
                 </th>
                 <th id="hTextOfQuestion" scope="col" class="text-left">
                     <a href="{{ sort.textOfQuestion.url }}" title="{{ __f('Sort by %s', {'%s': 'text of question'}) }}" class="{{ sort.textOfQuestion.class }}">{{ __('Text of question') }}</a>
-                </th>
-                <th id="hForLanguage" scope="col" class="text-left">
-                    <a href="{{ sort.forLanguage.url }}" title="{{ __f('Sort by %s', {'%s': 'for language'}) }}" class="{{ sort.forLanguage.class }}">{{ __('For language') }}</a>
                 </th>
                 <th id="hStartDate" scope="col" class="text-left">
                     <a href="{{ sort.startDate.url }}" title="{{ __f('Sort by %s', {'%s': 'start date'}) }}" class="{{ sort.startDate.class }}">{{ __('Start date') }}</a>
@@ -84,9 +80,6 @@
                 <td headers="hTextOfQuestion" class="text-left">
                     {{ question.textOfQuestion|striptags|truncate(50) }}
                 </td>
-                <td headers="hForLanguage" class="text-left">
-                    {{ question.forLanguage|languageName }}
-                </td>
                 <td headers="hStartDate" class="text-left">
                     {% if question.startDate is not empty %}
                         {{ question.startDate|localizeddate('medium', 'short') }}
@@ -100,7 +93,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}8{% else %}7{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}7{% else %}6{% endif %}">
             {{ __('No questions found.') }}
               </td>
             </tr>
