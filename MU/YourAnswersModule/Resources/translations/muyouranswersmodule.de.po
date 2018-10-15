@@ -1003,6 +1003,9 @@ msgstr "Aktualisierer"
 msgid "Used to determine moderator user accounts for sending email notifications."
 msgstr "Nutzbar zur Bestimmung von Moderator Benutzerbereichen für die Versendung von mails."
 
+msgid "Using this form you agree to saving the entered text (privacy police)"
+msgstr "Mit der Nutzung dieses Formulars erkennst Du die Datenschutzerkärung an"
+
 msgid "View detail page"
 msgstr "Detail Ansicht ansehen"
 
