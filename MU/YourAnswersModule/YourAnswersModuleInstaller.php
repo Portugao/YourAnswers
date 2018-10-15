@@ -14,10 +14,53 @@ namespace MU\YourAnswersModule;
 
 use MU\YourAnswersModule\Base\AbstractYourAnswersModuleInstaller;
 
+use Doctrine\DBAL\Connection;
+use RuntimeException;
+use Zikula\Core\AbstractExtensionInstaller;
+
 /**
  * Installer implementation class.
  */
 class YourAnswersModuleInstaller extends AbstractYourAnswersModuleInstaller
 {
+    /**
+     * Upgrade the MUYourAnswersModule application from an older version.
+     *
+     * If the upgrade fails at some point, it returns the last upgraded version.
+     *
+     * @param integer $oldVersion Version to upgrade from
+     *
+     * @return boolean True on success, false otherwise
+     *
+     * @throws RuntimeException Thrown if database tables can not be updated
+     */
+    public function upgrade($oldVersion)
+    {
+         $logger = $this->container->get('logger');
+         
+         // Upgrade dependent on old version number
+         switch ($oldVersion) {
+         case '1.0.0':
+         // do something
+         // ...
+         // update the database schema
+         try {
+         $this->schemaTool->update($this->listEntityClasses());
+         } catch (\Exception $exception) {
+         $this->addFlash('error', $this->__('Doctrine Exception') . ': ' . $exception->getMessage());
+         $logger->error('{app}: Could not update the database tables during the upgrade. Error details: {errorMessage}.', ['app' => 'MUYourAnswersModule', 'errorMessage' => $exception->getMessage()]);
+         
+         return false;
+         }
+         case '1.0.1':   
+         // for later update
+         }
+         
+
+            
+        
+        // update successful
+        return true;
+    }
     // feel free to extend the installer here
 }
