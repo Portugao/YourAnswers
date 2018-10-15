@@ -134,6 +134,7 @@ abstract class AbstractAnswerFinderType extends AbstractType
                     $this->__('Name') => 'name',
                     $this->__('Text of answer') => 'textOfAnswer',
                     $this->__('Content') => 'content',
+                    $this->__('Read privacy') => 'readPrivacy',
                     $this->__('Creation date') => 'createdDate',
                     $this->__('Creator') => 'createdBy',
                     $this->__('Update date') => 'updatedDate',

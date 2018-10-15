@@ -14,6 +14,7 @@ namespace MU\YourAnswersModule\Form\Type\Base;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
@@ -157,6 +158,20 @@ abstract class AbstractAnswerType extends AbstractType
                 'title' => $this->__('Enter the content of the answer.')
             ],
             'required' => false,
+        ]);
+        
+        $builder->add('readPrivacy', CheckboxType::class, [
+            'label' => $this->__('Read privacy') . ':',
+            'label_attr' => [
+                'class' => 'tooltips',
+                'title' => $this->__('Using this form you agree to saving the entered text (privacy police)')
+            ],
+            'help' => $this->__('Using this form you agree to saving the entered text (privacy police)'),
+            'attr' => [
+                'class' => '',
+                'title' => $this->__('read privacy ?')
+            ],
+            'required' => true,
         ]);
     }
 

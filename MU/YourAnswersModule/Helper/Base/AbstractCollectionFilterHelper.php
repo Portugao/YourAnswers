@@ -158,6 +158,7 @@ abstract class AbstractCollectionFilterHelper
         $parameters['question'] = $request->query->get('question', 0);
         $parameters['workflowState'] = $request->query->get('workflowState', '');
         $parameters['q'] = $request->query->get('q', '');
+        $parameters['readPrivacy'] = $request->query->get('readPrivacy', '');
     
         return $parameters;
     }
@@ -211,6 +212,14 @@ abstract class AbstractCollectionFilterHelper
                     $qb = $this->addSearchFilter('answer', $qb, $v);
                 }
                 continue;
+            }
+            if (in_array($k, ['readPrivacy'])) {
+                // boolean filter
+                if ($v == 'no') {
+                    $qb->andWhere('tbl.' . $k . ' = 0');
+                } elseif ($v == 'yes' || $v == '1') {
+                    $qb->andWhere('tbl.' . $k . ' = 1');
+                }
             }
     
             if (is_array($v)) {

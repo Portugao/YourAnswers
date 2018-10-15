@@ -82,6 +82,16 @@ abstract class AbstractAnswerEntity extends EntityAccess
      */
     protected $content = '';
     
+    /**
+     * Using this form you agree to saving the entered text (privacy police)
+     *
+     * @ORM\Column(type="boolean")
+     * @Assert\IsTrue(message="This option is mandatory.")
+     * @Assert\Type(type="bool")
+     * @var boolean $readPrivacy
+     */
+    protected $readPrivacy = false;
+    
     
     /**
      * Bidirectional - Many answers [answers] are linked by one question [question] (OWNING SIDE).
@@ -247,6 +257,30 @@ abstract class AbstractAnswerEntity extends EntityAccess
     {
         if ($this->content !== $content) {
             $this->content = isset($content) ? $content : '';
+        }
+    }
+    
+    /**
+     * Returns the read privacy.
+     *
+     * @return boolean
+     */
+    public function getReadPrivacy()
+    {
+        return $this->readPrivacy;
+    }
+    
+    /**
+     * Sets the read privacy.
+     *
+     * @param boolean $readPrivacy
+     *
+     * @return void
+     */
+    public function setReadPrivacy($readPrivacy)
+    {
+        if (boolval($this->readPrivacy) !== boolval($readPrivacy)) {
+            $this->readPrivacy = boolval($readPrivacy);
         }
     }
     

@@ -3,8 +3,10 @@ application "YourAnswers" {
     author "Michael Ueberschaer"
     email "info@homepages-mit-zikula.de"
     url "https://homepages-mit-zikula.de"
+    version "1.0.1"
     prefix "youranswers"
-    markFiles "Resources/views/Answer/includeDisplayItemListMany.html.twig,\r\nResources/views/Question/display.html.twig"
+    generatePoweredByBacklinksIntoFooterTemplates false
+    markFiles "Entity/AbstractQuestionEntity.php,\r\nHelper/WorkflowHelper.php,\r\nResources/views/Answer/edit.html.twig,\r\nResources/views/Answer/includeDisplayItemListMany.html.twig,\r\nResources/views/Question/display.html.twig"
     entities {
         entity "answer" {
             nameMultiple "answers"
@@ -23,6 +25,11 @@ application "YourAnswers" {
             ,
                 text "content" {
                     mandatory false
+                }
+            ,
+                boolean "readPrivacy" {
+                    documentation "Using this form you agree to saving the entered text (privacy police)"
+                    defaultValue "0"
                 }
             }
             actions {

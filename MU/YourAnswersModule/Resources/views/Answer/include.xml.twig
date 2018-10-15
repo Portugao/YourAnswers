@@ -4,6 +4,7 @@
     <name><![CDATA[{{ answer.name }}]]></name>
     <textOfAnswer><![CDATA[{{ answer.textOfAnswer|safeHtml }}]]></textOfAnswer>
     <content><![CDATA[{{ answer.content|safeHtml }}]]></content>
+    <readPrivacy>{% if not answer.readPrivacy %}0{% else %}1{% endif %}</readPrivacy>
     <workflowState>{{ answer.workflowState|muyouranswersmodule_objectState(false)|lower }}</workflowState>
     <question>{% if answer.question|default %}{{ answer.question|muyouranswersmodule_formattedTitle }}{% endif %}</question>
 </answer>

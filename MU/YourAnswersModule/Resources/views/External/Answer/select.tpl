@@ -23,6 +23,7 @@
                     <option value="name"{if $sort eq 'name'} selected="selected"{/if}>{gt text='Name'}</option>
                     <option value="textOfAnswer"{if $sort eq 'textOfAnswer'} selected="selected"{/if}>{gt text='Text of answer'}</option>
                     <option value="content"{if $sort eq 'content'} selected="selected"{/if}>{gt text='Content'}</option>
+                    <option value="readPrivacy"{if $sort eq 'readPrivacy'} selected="selected"{/if}>{gt text='Read privacy'}</option>
                     <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>
                     <option value="createdBy"{if $sort eq 'createdBy'} selected="selected"{/if}>{gt text='Creator'}</option>
                     <option value="updatedDate"{if $sort eq 'updatedDate'} selected="selected"{/if}>{gt text='Update date'}</option>

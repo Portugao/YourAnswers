@@ -47,6 +47,13 @@
             {% if pageSizeSelector is defined and pageSizeSelector != true %}
                 </div>
             {% endif %}
+            {% if readPrivacyFilter is defined and readPrivacyFilter != true %}
+                <div class="hidden">
+            {% endif %}
+                {{ form_row(quickNavForm.readPrivacy) }}
+            {% if readPrivacyFilter is defined and readPrivacyFilter != true %}
+                </div>
+            {% endif %}
             {{ form_widget(quickNavForm.updateview) }}
         </fieldset>
     </div>

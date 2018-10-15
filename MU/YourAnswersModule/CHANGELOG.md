@@ -1,3 +1,3 @@
 # CHANGELOG
 
-Changes in MUYourAnswersModule 1.0.0
+Changes in MUYourAnswersModule 1.0.1

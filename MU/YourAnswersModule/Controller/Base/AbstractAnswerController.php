@@ -146,6 +146,7 @@ abstract class AbstractAnswerController extends AbstractController
             new Column('name'),
             new Column('textOfAnswer'),
             new Column('content'),
+            new Column('readPrivacy'),
             new Column('question'),
             new Column('createdBy'),
             new Column('createdDate'),

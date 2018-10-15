@@ -33,6 +33,13 @@
             <dt>{{ __('Content') }}</dt>
             <dd>{{ answer.content|safeHtml }}</dd>
         {% endif %}
+        <dt>{{ __('Read privacy') }}</dt>
+        <dd>{% if answer.readPrivacy %}
+            <i class="fa fa-check text-success" title="{{ __('Yes') }}"></i>
+        {% else %}
+            <i class="fa fa-times text-danger" title="{{ __('No') }}"></i>
+        {% endif %}
+        </dd>
         {% if answer.question|default %}
             <dt>{{ __('Question') }}</dt>
             <dd>

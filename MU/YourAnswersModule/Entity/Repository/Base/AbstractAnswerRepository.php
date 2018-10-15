@@ -59,6 +59,7 @@ abstract class AbstractAnswerRepository extends EntityRepository
             'name',
             'textOfAnswer',
             'content',
+            'readPrivacy',
             'createdBy',
             'createdDate',
             'updatedBy',
